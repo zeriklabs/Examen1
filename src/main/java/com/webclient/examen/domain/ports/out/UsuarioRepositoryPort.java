@@ -9,5 +9,6 @@ public interface UsuarioRepositoryPort {
     boolean existePorCorreo(String correo);
     boolean existePorUsuario(String usuario);
     List<Usuario> buscarPorCoincidencia(String texto);
+    List<Usuario> obtenerTodos();
     Optional<Usuario> buscarPorId(Long id);
 }

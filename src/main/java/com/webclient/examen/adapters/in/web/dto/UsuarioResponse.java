@@ -5,7 +5,9 @@ public class UsuarioResponse {
     private String nombre;
     private String apellidoPaterno;
     private String apellidoMaterno;
+    private String correo;
     private String usuario;
+    private String fechaNacimiento;
 
     public UsuarioResponse() {
     }
@@ -16,6 +18,16 @@ public class UsuarioResponse {
         this.apellidoPaterno = apellidoPaterno;
         this.apellidoMaterno = apellidoMaterno;
         this.usuario = usuario;
+    }
+
+    public UsuarioResponse(Long id, String nombre, String apellidoPaterno, String apellidoMaterno, String correo, String usuario, String fechaNacimiento) {
+        this.id = id;
+        this.nombre = nombre;
+        this.apellidoPaterno = apellidoPaterno;
+        this.apellidoMaterno = apellidoMaterno;
+        this.correo = correo;
+        this.usuario = usuario;
+        this.fechaNacimiento = fechaNacimiento;
     }
 
     public Long getId() {
@@ -50,11 +62,27 @@ public class UsuarioResponse {
         this.apellidoMaterno = apellidoMaterno;
     }
 
+    public String getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
+    }
+
     public String getUsuario() {
         return usuario;
     }
 
     public void setUsuario(String usuario) {
         this.usuario = usuario;
+    }
+
+    public String getFechaNacimiento() {
+        return fechaNacimiento;
+    }
+
+    public void setFechaNacimiento(String fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
     }
 }

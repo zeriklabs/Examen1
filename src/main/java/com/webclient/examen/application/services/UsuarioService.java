@@ -54,6 +54,12 @@ public class UsuarioService implements RegistrarUsuarioUseCase, BuscarUsuariosUs
         return usuarioRepositoryPort.buscarPorCoincidencia(texto.trim());
     }
 
+    @Override
+    @Transactional(readOnly = true)
+    public List<Usuario> obtenerTodos() {
+        return usuarioRepositoryPort.obtenerTodos();
+    }
+
     private void validarCamposObligatorios(Usuario u) {
         if (u == null) {
             throw new ValidacionNegocioException("Los datos del usuario son obligatorios.");

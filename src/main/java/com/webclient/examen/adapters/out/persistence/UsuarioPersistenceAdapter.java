@@ -43,6 +43,14 @@ public class UsuarioPersistenceAdapter implements UsuarioRepositoryPort {
     }
 
     @Override
+    public List<Usuario> obtenerTodos() {
+        return usuarioJpaRepository.findAll()
+                .stream()
+                .map(this::toDomain)
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public Optional<Usuario> buscarPorId(Long id) {
         return usuarioJpaRepository.findById(id).map(this::toDomain);
     }

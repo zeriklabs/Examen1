@@ -47,10 +47,31 @@ public class UsuarioController {
                 registrado.getNombre(),
                 registrado.getApellidoPaterno(),
                 registrado.getApellidoMaterno(),
-                registrado.getUsuario()
+                registrado.getCorreo(),
+                registrado.getUsuario(),
+                registrado.getFechaNacimiento() != null ? registrado.getFechaNacimiento().toString() : null
         );
 
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<UsuarioResponse>> obtenerTodos() {
+        List<Usuario> resultados = buscarUsuariosUseCase.obtenerTodos();
+
+        List<UsuarioResponse> responseList = resultados.stream()
+                .map(u -> new UsuarioResponse(
+                        u.getId(),
+                        u.getNombre(),
+                        u.getApellidoPaterno(),
+                        u.getApellidoMaterno(),
+                        u.getCorreo(),
+                        u.getUsuario(),
+                        u.getFechaNacimiento() != null ? u.getFechaNacimiento().toString() : null
+                ))
+                .collect(Collectors.toList());
+
+        return ResponseEntity.ok(responseList);
     }
 
     @GetMapping("/buscar")
@@ -63,7 +84,9 @@ public class UsuarioController {
                         u.getNombre(),
                         u.getApellidoPaterno(),
                         u.getApellidoMaterno(),
-                        u.getUsuario()
+                        u.getCorreo(),
+                        u.getUsuario(),
+                        u.getFechaNacimiento() != null ? u.getFechaNacimiento().toString() : null
                 ))
                 .collect(Collectors.toList());
 
