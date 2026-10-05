@@ -1,28 +1,28 @@
-# Etapa 1: Compilación con Maven y Java 17
+# Etapa 1: Compilación con Maven + Java 17
 FROM maven:3.9.6-eclipse-temurin-17 AS build
 WORKDIR /app
 
-# Copiar descriptores y descargar dependencias para aprovechar la caché de Docker
 COPY pom.xml ./
 COPY .mvn ./.mvn
 COPY mvnw ./
 RUN chmod +x mvnw
 RUN ./mvnw dependency:go-offline -B || true
 
-# Copiar el código fuente y compilar empaquetando el JAR (omitiendo tests para un build rápido)
 COPY src ./src
 RUN ./mvnw clean package -DskipTests
 
-# Etapa 2: Imagen ligera para ejecución (JRE 17)
+# Etapa 2: Runtime ligero con JRE 17
 FROM eclipse-temurin:17-jre-alpine
 WORKDIR /app
 
-# Copiar el artefacto JAR generado en la etapa anterior
 COPY --from=build /app/target/*.jar app.jar
 
-# Render inyecta la variable PORT automáticamente (por defecto 8080)
-ENV PORT=8080
-EXPOSE 8080
+# Variables de entorno con defaults seguros para Render sin base de datos externa
+ENV PORT=10000
+ENV SPRING_DATASOURCE_URL="jdbc:h2:mem:red_social;DB_CLOSE_DELAY=-1;MODE=MySQL;DB_CLOSE_ON_EXIT=FALSE"
+ENV SPRING_DATASOURCE_USERNAME="sa"
+ENV SPRING_DATASOURCE_PASSWORD=""
 
-# Ejecutar la aplicación
+EXPOSE 10000
+
 ENTRYPOINT ["java", "-jar", "app.jar"]
