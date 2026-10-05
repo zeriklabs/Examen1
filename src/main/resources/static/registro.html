@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Usuario | Red Social</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #f0f2f5 0%, #e4e6eb 100%);
+            min-height: 100vh;
+        }
+        .navbar-brand {
+            font-weight: 700;
+            color: #1877f2 !important;
+            letter-spacing: -0.5px;
+        }
+        .card-custom {
+            border: none;
+            border-radius: 1rem;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+            background-color: #ffffff;
+        }
+        .btn-primary-custom {
+            background-color: #1877f2;
+            border: none;
+            font-weight: 600;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            transition: all 0.2s ease-in-out;
+        }
+        .btn-primary-custom:hover {
+            background-color: #166fe5;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(24, 119, 242, 0.3);
+        }
+        .form-control:focus {
+            border-color: #1877f2;
+            box-shadow: 0 0 0 0.25rem rgba(24, 119, 242, 0.15);
+        }
+        .input-group-text {
+            background-color: #f8f9fa;
+            border-right: none;
+        }
+        .form-control.with-icon {
+            border-left: none;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navegación -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom shadow-sm">
+        <div class="container">
+            <a class="navbar-brand fs-4" href="/registro.html">
+                <i class="bi bi-people-fill me-2"></i>Red Social
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto gap-2">
+                    <li class="nav-item">
+                        <a class="nav-link active fw-semibold text-primary" href="/registro.html">
+                            <i class="bi bi-person-plus me-1"></i> Registro
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link fw-semibold text-secondary" href="/busqueda.html">
+                            <i class="bi bi-search me-1"></i> Buscador de Usuarios
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Contenedor Principal -->
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-7 col-md-9">
+
+                <div class="card card-custom p-4 p-md-5">
+                    <div class="text-center mb-4">
+                        <div class="badge bg-primary-subtle text-primary px-3 py-2 rounded-pill mb-2 fw-semibold">
+                            <i class="bi bi-shield-lock-fill me-1"></i> Funcionalidad 1
+                        </div>
+                        <h2 class="fw-bold text-dark">Registro de usuario</h2>
+                        <p class="text-muted">Crea una cuenta en la red social completando tus datos personales</p>
+                    </div>
+
+                    <!-- Mensajes de Alerta -->
+                    <div id="alertContainer"></div>
+
+                    <!-- Formulario de Registro -->
+                    <form id="registroForm" novalidate>
+                        <div class="row g-3">
+                            <!-- Nombre -->
+                            <div class="col-12">
+                                <label for="nombre" class="form-label fw-semibold">Nombre <span class="text-danger">*</span></label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="bi bi-person"></i></span>
+                                    <input type="text" class="form-control with-icon" id="nombre" name="nombre" placeholder="Ej. Juan" required maxlength="50">
+                                </div>
+                            </div>
+
+                            <!-- Apellido Paterno -->
+                            <div class="col-md-6">
+                                <label for="apellidoPaterno" class="form-label fw-semibold">Apellido paterno <span class="text-danger">*</span></label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="bi bi-person-badge"></i></span>
+                                    <input type="text" class="form-control with-icon" id="apellidoPaterno" name="apellidoPaterno" placeholder="Ej. Pérez" required maxlength="50">
+                                </div>
+                            </div>
+
+                            <!-- Apellido Materno -->
+                            <div class="col-md-6">
+                                <label for="apellidoMaterno" class="form-label fw-semibold">Apellido materno <span class="text-danger">*</span></label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="bi bi-person-badge"></i></span>
+                                    <input type="text" class="form-control with-icon" id="apellidoMaterno" name="apellidoMaterno" placeholder="Ej. López" required maxlength="50">
+                                </div>
+                            </div>
+
+                            <!-- Correo Electrónico -->
+                            <div class="col-12">
+                                <label for="correo" class="form-label fw-semibold">Correo electrónico <span class="text-danger">*</span></label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="bi bi-envelope"></i></span>
+                                    <input type="email" class="form-control with-icon" id="correo" name="correo" placeholder="ejemplo@correo.com" required maxlength="100">
+                                </div>
+                                <div class="form-text">Debe ser un correo válido y único en el sistema.</div>
+                            </div>
+
+                            <!-- Usuario -->
+                            <div class="col-md-6">
+                                <label for="usuario" class="form-label fw-semibold">Usuario <span class="text-danger">*</span></label>
+                                <div class="input-group">
+                                    <span class="input-group-text">@</span>
+                                    <input type="text" class="form-control with-icon" id="usuario" name="usuario" placeholder="juanperez" required minlength="5" maxlength="50">
+                                </div>
+                                <div class="form-text">Mínimo 5 caracteres.</div>
+                            </div>
+
+                            <!-- Contraseña -->
+                            <div class="col-md-6">
+                                <label for="password" class="form-label fw-semibold">Contraseña <span class="text-danger">*</span></label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="bi bi-key"></i></span>
+                                    <input type="password" class="form-control with-icon" id="password" name="password" placeholder="••••••••" required minlength="8" maxlength="100">
+                                </div>
+                                <div class="form-text">Mínimo 8 caracteres.</div>
+                            </div>
+
+                            <!-- Fecha de Nacimiento -->
+                            <div class="col-12">
+                                <label for="fechaNacimiento" class="form-label fw-semibold">Fecha de nacimiento <span class="text-danger">*</span></label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="bi bi-calendar-event"></i></span>
+                                    <input type="date" class="form-control with-icon" id="fechaNacimiento" name="fechaNacimiento" required>
+                                </div>
+                            </div>
+
+                            <!-- Botón de Registro -->
+                            <div class="col-12 mt-4">
+                                <button type="submit" id="btnSubmit" class="btn btn-primary btn-primary-custom w-100 py-2 fs-5">
+                                    <span id="btnSpinner" class="spinner-border spinner-border-sm me-2 d-none" role="status"></span>
+                                    <i class="bi bi-person-check-fill me-2" id="btnIcon"></i>Registrar usuario
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+
+                    <!-- Enlace a Buscador -->
+                    <div class="text-center mt-4 pt-3 border-top">
+                        <span class="text-muted">¿Ya estás registrado?</span>
+                        <a href="/busqueda.html" class="ms-1 fw-semibold text-decoration-none">Ir al buscador de usuarios &rarr;</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap 5 JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Script AJAX / Fetch -->
+    <script>
+        const registroForm = document.getElementById('registroForm');
+        const alertContainer = document.getElementById('alertContainer');
+        const btnSubmit = document.getElementById('btnSubmit');
+        const btnSpinner = document.getElementById('btnSpinner');
+        const btnIcon = document.getElementById('btnIcon');
+
+        function mostrarAlerta(mensaje, tipo = 'danger') {
+            const icono = tipo === 'success' ? 'bi-check-circle-fill' : 'bi-exclamation-triangle-fill';
+            alertContainer.innerHTML = `
+                <div class="alert alert-${tipo} alert-dismissible fade show d-flex align-items-center mb-4" role="alert">
+                    <i class="bi ${icono} fs-4 me-3"></i>
+                    <div>${mensaje}</div>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            `;
+            // Scroll hacia la alerta si está fuera de vista
+            alertContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        function limpiarAlertas() {
+            alertContainer.innerHTML = '';
+        }
+
+        registroForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            limpiarAlertas();
+
+            const nombre = document.getElementById('nombre').value.trim();
+            const apellidoPaterno = document.getElementById('apellidoPaterno').value.trim();
+            const apellidoMaterno = document.getElementById('apellidoMaterno').value.trim();
+            const correo = document.getElementById('correo').value.trim();
+            const usuario = document.getElementById('usuario').value.trim();
+            const password = document.getElementById('password').value;
+            const fechaNacimiento = document.getElementById('fechaNacimiento').value;
+
+            // 1. Validar campos obligatorios
+            if (!nombre || !apellidoPaterno || !apellidoMaterno || !correo || !usuario || !password || !fechaNacimiento) {
+                mostrarAlerta('Todos los campos son obligatorios.');
+                return;
+            }
+
+            // 2. Validar formato de correo
+            const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!regexEmail.test(correo)) {
+                mostrarAlerta('El correo electrónico debe tener un formato válido.');
+                return;
+            }
+
+            // 5. Validar usuario mínimo 5 caracteres
+            if (usuario.length < 5) {
+                mostrarAlerta('El usuario deberá tener al menos 5 caracteres.');
+                return;
+            }
+
+            // 6. Validar contraseña mínimo 8 caracteres
+            if (password.length < 8) {
+                mostrarAlerta('La contraseña deberá tener al menos 8 caracteres.');
+                return;
+            }
+
+            // 7. Validar fecha válida (no futura)
+            const hoy = new Date().toISOString().split('T')[0];
+            if (fechaNacimiento > hoy) {
+                mostrarAlerta('La fecha de nacimiento debe ser válida y no futura.');
+                return;
+            }
+
+            // Payload para la API
+            const payload = {
+                nombre: nombre,
+                apellidoPaterno: apellidoPaterno,
+                apellidoMaterno: apellidoMaterno,
+                correo: correo,
+                usuario: usuario,
+                password: password,
+                fechaNacimiento: fechaNacimiento
+            };
+
+            // Efecto de carga
+            btnSubmit.disabled = true;
+            btnSpinner.classList.remove('d-none');
+            btnIcon.classList.add('d-none');
+
+            try {
+                const response = await fetch('/api/v1/usuarios', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify(payload)
+                });
+
+                const data = await response.json().catch(() => null);
+
+                if (response.ok) {
+                    mostrarAlerta('Usuario registrado correctamente.', 'success');
+                    registroForm.reset();
+                } else {
+                    const mensajeError = data && data.mensaje ? data.mensaje : 'Ocurrió un error al registrar el usuario.';
+                    mostrarAlerta(mensajeError, 'danger');
+                }
+            } catch (error) {
+                mostrarAlerta('No se pudo conectar con el servidor. Verifica que Spring Boot esté activo.', 'danger');
+            } finally {
+                btnSubmit.disabled = false;
+                btnSpinner.classList.add('d-none');
+                btnIcon.classList.remove('d-none');
+            }
+        });
+    </script>
+</body>
+</html>
